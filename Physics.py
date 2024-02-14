@@ -1,8 +1,18 @@
 import phylib;
+import _phylib;
 
 ################################################################################
 # import constants from phylib to global varaibles
-BALL_RADIUS   = phylib.PHYLIB_BALL_RADIUS;
+PHYLIB_BALL_DIAMETER = phylib.PHYLIB_BALL_DIAMETER;
+PHYLIB_HOLE_RADIUS = phylib.PHYLIB_HOLE_RADIUS;
+PHYLIB_TABLE_LENGTH = phylib.PHYLIB_TABLE_LENGTH;
+PHYLIB_TABLE_WIDTH = phylib.PHYLIB_TABLE_WIDTH;
+PHYLIB_SIM_RATE = phylib.PHYLIB_SIM_RATE;
+PHYLIB_VEL_EPSILON = phylib.PHYLIB_VEL_EPSILON;
+PHYLIB_DRAG = phylib.PHYLIB_DRAG;
+PHYLIB_MAX_TIME = phylib.PHYLIB_MAX_TIME;
+PHYLIB_MAX_OBJECTS = phylib.PHYLIB_MAX_OBJECTS;
+
 
 # add more here
 
@@ -66,6 +76,83 @@ class StillBall( phylib.phylib_object ):
 
 
 ################################################################################
+
+class RollingBall(phylib.phylib_object):
+    """
+    Python RollingBall class.
+    """
+
+    def __init__(self, number, pos, vel, acc):
+        """
+        Constructor function. Requires ball number, position (x,y), velocity (vx,vy),
+        and acceleration (ax,ay) as arguments.
+        """
+        phylib.phylib_object.__init__(self,
+                                       phylib.PHYLIB_ROLLING_BALL,
+                                       number,
+                                       pos,
+                                       None, None,
+                                       vel,
+                                       acc);
+
+        self.__class__ = RollingBall;
+
+
+class Hole(phylib.phylib_object):
+    """
+    Python Hole class.
+    """
+
+    def __init__(self, pos):
+        """
+        Constructor function. Requires position (x,y) as argument.
+        """
+        phylib.phylib_object.__init__(self,
+                                       phylib.PHYLIB_HOLE,
+                                       None,
+                                       pos,
+                                       None, None, None, None);
+
+        self.__class__ = Hole;
+
+
+class HCushion(phylib.phylib_object):
+    """
+    Python HCushion class.
+    """
+
+    def __init__(self, y):
+        """
+        Constructor function. Requires y-coordinate as argument.
+        """
+        phylib.phylib_object.__init__(self,
+                                       phylib.PHYLIB_HCUSHION,
+                                       None,
+                                       None,
+                                       None, None, None, None);
+
+        self.obj.hcushion.y = y;
+        self.__class__ = HCushion;
+
+
+class VCushion(phylib.phylib_object):
+    """
+    Python VCushion class.
+    """
+
+    def __init__(self, x):
+        """
+        Constructor function. Requires x-coordinate as argument.
+        """
+        phylib.phylib_object.__init__(self,
+                                       phylib.PHYLIB_VCUSHION,
+                                       None,
+                                       None,
+                                       None, None, None, None);
+
+        self.obj.vcushion.x = x;
+        self.__class__ = VCushion;
+
 
 class Table( phylib.phylib_table ):
     """
