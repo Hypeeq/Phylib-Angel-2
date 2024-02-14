@@ -596,3 +596,4 @@ char *phylib_object_string(phylib_object *object)
     }
     return string;
 }
+
