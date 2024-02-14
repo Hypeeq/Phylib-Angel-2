@@ -142,7 +142,7 @@ void phylib_copy_object(phylib_object **dest, phylib_object **src)
         {
             // Handle memory allocation failure if needed
             // For now, assign NULL to dest and return
-            
+
             return;
         }
 
@@ -150,18 +150,17 @@ void phylib_copy_object(phylib_object **dest, phylib_object **src)
         memcpy(*dest, *src, sizeof(phylib_object));
 
         // Save the address of the new object at the location pointed to by dest
-       
     }
 }
 
 phylib_table *phylib_copy_table(phylib_table *table)
 {
-       if (table == NULL)
+    if (table == NULL)
     {
         return NULL;
     }
     phylib_table *new_table;
-    new_table = (phylib_table*)malloc(sizeof(phylib_table));
+    new_table = (phylib_table *)malloc(sizeof(phylib_table));
 
     if (new_table == NULL)
     {
@@ -170,7 +169,7 @@ phylib_table *phylib_copy_table(phylib_table *table)
     }
     new_table->time = table->time;
 
-     for (int i = 0; i < PHYLIB_MAX_OBJECTS; ++i)
+    for (int i = 0; i < PHYLIB_MAX_OBJECTS; ++i)
     {
         if (table->object[i] != NULL)
         {
@@ -183,7 +182,6 @@ phylib_table *phylib_copy_table(phylib_table *table)
     }
 
     return new_table;
-
 }
 
 void phylib_add_object(phylib_table *table, phylib_object *object)
@@ -501,7 +499,7 @@ phylib_table *phylib_segment(phylib_table *table)
             resultTable->time += PHYLIB_SIM_RATE; // Time update
         }
     }
-     phylib_free_table(resultTable);
+    phylib_free_table(resultTable);
     return NULL; // Max time reached
 }
 
@@ -548,4 +546,53 @@ int check_collision_condition(const phylib_table *resultTable)
         }
     }
     return 0;
+}
+
+char *phylib_object_string(phylib_object *object)
+{
+    static char string[80];
+    if (object == NULL)
+    {
+        snprintf(string, 80, "NULL;");
+        return string;
+    }
+    switch (object->type)
+    {
+    case PHYLIB_STILL_BALL:
+        snprintf(string, 80,
+                 "STILL_BALL (%d,%6.1lf,%6.1lf)",
+                 object->obj.still_ball.number,
+                 object->obj.still_ball.pos.x,
+                 object->obj.still_ball.pos.y);
+        break;
+    case PHYLIB_ROLLING_BALL:
+        snprintf(string, 80,
+                 "ROLLING_BALL (%d,%6.1lf,%6.1lf,%6.1lf,%6.1lf,%6.1lf,%6.1lf)",
+                 object->obj.rolling_ball.number,
+                 object->obj.rolling_ball.pos.x,
+                 object->obj.rolling_ball.pos.y,
+                 object->obj.rolling_ball.vel.x,
+                 object->obj.rolling_ball.vel.y,
+                 object->obj.rolling_ball.acc.x,
+                 object->obj.rolling_ball.acc.y);
+        break;
+
+    case PHYLIB_HOLE:
+        snprintf(string, 80,
+                 "HOLE (%6.1lf,%6.1lf)",
+                 object->obj.hole.pos.x,
+                 object->obj.hole.pos.y);
+        break;
+    case PHYLIB_HCUSHION:
+        snprintf(string, 80,
+                 "HCUSHION (%6.1lf)",
+                 object->obj.hcushion.y);
+        break;
+    case PHYLIB_VCUSHION:
+        snprintf(string, 80,
+                 "VCUSHION (%6.1lf)",
+                 object->obj.vcushion.x);
+        break;
+    }
+    return string;
 }

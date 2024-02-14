@@ -111,3 +111,6 @@ phylib_table *phylib_segment( phylib_table *table );
 void update_rolling_balls(phylib_table* resultTable, const phylib_table* table, double currentTime);
 int check_stopped_condition(const phylib_table* resultTable);
 int check_collision_condition(const phylib_table* resultTable);
+
+//Expansion
+char *phylib_object_string(phylib_object *object);
