@@ -1,14 +1,14 @@
 import phylib
 
-PHYLIB_BALL_DIAMETER = phylib.PHYLIB_BALL_DIAMETER
-PHYLIB_HOLE_RADIUS = phylib.PHYLIB_HOLE_RADIUS
-PHYLIB_TABLE_LENGTH = phylib.PHYLIB_TABLE_LENGTH
-PHYLIB_TABLE_WIDTH = phylib.PHYLIB_TABLE_WIDTH
-PHYLIB_SIM_RATE = phylib.PHYLIB_SIM_RATE
-PHYLIB_VEL_EPSILON = phylib.PHYLIB_VEL_EPSILON
-PHYLIB_DRAG = phylib.PHYLIB_DRAG
-PHYLIB_MAX_TIME = phylib.PHYLIB_MAX_TIME
-PHYLIB_MAX_OBJECTS = phylib.PHYLIB_MAX_OBJECTS
+BALL_DIAMETER = phylib.PHYLIB_BALL_DIAMETER
+HOLE_RADIUS = phylib.PHYLIB_HOLE_RADIUS
+TABLE_LENGTH = 2700
+TABLE_WIDTH = phylib.PHYLIB_TABLE_LENGTH/2
+SIM_RATE = phylib.PHYLIB_SIM_RATE
+VEL_EPSILON = phylib.PHYLIB_VEL_EPSILON
+DRAG = phylib.PHYLIB_DRAG
+MAX_TIME = phylib.PHYLIB_MAX_TIME
+MAX_OBJECTS = phylib.PHYLIB_MAX_OBJECTS
 
 BALL_COLOURS = [
     "WHITE",
@@ -34,7 +34,7 @@ class Coordinate(phylib.phylib_coord):
     This creates a Coordinate subclass, that adds nothing new, but looks
     more like a nice Python class.
     """
-    pass
+    def __init__(self, x, y):
 
 
 class StillBall(phylib.phylib_object):
