@@ -90,13 +90,15 @@ class MyHandler(BaseHTTPRequestHandler):
                 file_index += 1
 
             # Generate HTML response
-            count = 0
             html_response = "<html><body><h1>Original Ball Positions and Velocities</h1>"
-            for filename in os.listdir():
-               # if filename.startswith('table-') and filename.endswith('.svg'):
-                    filename = 'table-0.svg'  # Specify the filename you want to display
-                    html_response += f"<object type='image/svg+xml' data='/{filename}'></object><br />"
-                  #  count += 1
+            html_response += "<ul>"
+            html_response += f"<li>Still Ball: ({sb_x}, {sb_y})</li>"
+            html_response += f"<li>Rolling Ball Position: ({rb_x}, {rb_y})  Velocity: ({rb_dx}, {rb_dy})</li>"
+            for file_index in range(file_index):
+                with open(f"table-{file_index}.svg", "rb") as svg_file:
+                    svg_content = svg_file.read().decode('utf-8')
+                    html_response += f"<div>{svg_content}</div>"
+
             html_response += "<a href='/shoot.html'>Back</a>"
             html_response += "</body></html>"
 

@@ -133,8 +133,7 @@ class HCushion(phylib.phylib_object):
         self.__class__ = HCushion
 
     def svg(self):
-       
-       return """ <rect width="1400" height="25" x="-25" y="%d" fill="darkgreen" />\n""" 
+       return """ <rect width="1400" height="25" x="-25" y="%d" fill="darkgreen" />\n""" % (self.obj.hcushion.y) 
 
 class VCushion(phylib.phylib_object):
     """
@@ -156,7 +155,7 @@ class VCushion(phylib.phylib_object):
         """
         Method to generate SVG representation of the vertical cushion.
         """
-        return """ <rect width="25" height="2750" x="%d" y="-25" fill="darkgreen" />\n""" 
+        return """ <rect width="25" height="2750" x="%d" y="-25" fill="darkgreen" />\n""" % (self.obj.vcushion.x)
 
 class Table(phylib.phylib_table):
     """
